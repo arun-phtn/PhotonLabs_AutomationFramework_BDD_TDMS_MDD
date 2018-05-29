@@ -76,16 +76,16 @@ public class CommonLibrary {
 		if (config.getString("breakPoint").equalsIgnoreCase("Desktop")) {
 			if ("Yes".equalsIgnoreCase(config.getString("fireFox"))) {
 				webDriver = new FirefoxDriver();
-				webDriver.get(config.getString("applicationURL"));
+				webDriver.get(config.getString("ApplicationUrl"));
 				webDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 			} else if ("Yes".equalsIgnoreCase(config.getString("chrome"))) {
-				System.setProperty("webdriver.chrome.driver", UserConfig.chromeDriver_Desktop_Location);
+				System.setProperty("webdriver.chrome.driver", "drivers/chromedriver");
 				webDriver = new ChromeDriver();
 				if("Windows".equalsIgnoreCase(config.getString("operatingSystem"))) {
 				} else {
 					webDriver = new ChromeDriver();
 				}
-				webDriver.get(config.getString("applicationURL"));
+				webDriver.get(config.getString("ApplicationUrl"));
 				webDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 			} else if ("Yes".equalsIgnoreCase(config.getString("IE"))) {
 			} else if ("Yes".equalsIgnoreCase(config.getString("safari"))) {

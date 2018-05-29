@@ -26,7 +26,7 @@ import cucumber.api.CucumberOptions;
 		glue = "com/photon/framework/StepDefinition", 
 		features = "src/test/java/com/photon/framework/Feature", 
 		//format = { "html:target/cucumber-htmlreport", "json:target/cucumber-report.json" }, 
-		tags = { "@JCP_Demo"},
+		tags = { "@FidelityDemo"},
 		//tags = { "@JCP_Login"}, 
 		monochrome = true
 		)
