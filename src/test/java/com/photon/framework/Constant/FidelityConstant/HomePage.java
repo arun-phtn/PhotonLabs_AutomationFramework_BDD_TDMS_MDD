@@ -11,4 +11,5 @@ public class HomePage {
     public static String header_News_Research="//*[@id=\"pnmm\"]/ul/li[3]/div[1]/a~XPATH";
     public static String header_Investment_Products="//*[@id=\"pnmm\"]/ul/li[4]/div[1]/a~XPATH";
     public static String header_Why_Fidelity="//*[@id=\"pnmm\"]/ul/li[5]/div[1]/a~XPATH";
+    public static String mobileMenuBar = "//*[@id=\"pnt\"]/span";
 }

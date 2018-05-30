@@ -8,6 +8,17 @@ public class FidelityStepLibrary {
         CommonLibrary.isElementPresentVerifyClick(HomePage.selectSearchOption);
     }
     
+    public static void verifyAndClickMobileMenu () {
+        try {
+            if(CommonLibrary.isMobile)
+                CommonLibrary.isElementPresentVerifyClick(HomePage.mobileMenuBar);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+        
+    
+    
     public static void validateSearchResult (String resultString) {
         try {
             CommonLibrary.isElementPresentVerification(HomePage.searchResult);

@@ -68,7 +68,7 @@ public class CommonLibrary {
     public static Configuration config = null;
     public static String highlightedWebElementStyle;
     public static WebElement highlightedWebElement;
-
+    public static boolean isMobile = false;
     public CommonLibrary() throws ConfigurationException, IOException {
         ConfigurationFactory factory = new ConfigurationFactory("config/config.xml");
         config = factory.getConfiguration();
@@ -96,7 +96,7 @@ public class CommonLibrary {
             }
             webDriver.manage().window().maximize();
         } else if (config.getString("breakPoint").equalsIgnoreCase("Mobile")) {
-
+            isMobile = true;
             if ("iOS".equalsIgnoreCase(config.getString("operatingSystem"))) {
                 initiateBrowser_iOS();
             } else if ("android".equalsIgnoreCase(config.getString("operatingSystem"))) {
@@ -129,8 +129,8 @@ public class CommonLibrary {
             capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Samsung Galaxy S8");
             capabilities.setCapability(MobileCapabilityType.VERSION, "7.0");
             URL url = new URL("http://127.0.0.1:4723/wd/hub");
-            WebDriver driver = new AndroidDriver(url, capabilities);
-            driver.get("https://www.fidelity.com/");
+            webDriver = new AndroidDriver(url, capabilities);
+            webDriver.get("https://www.fidelity.com/");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -196,10 +196,12 @@ public class CommonLibrary {
             capabilities.setCapability("app", UserConfig.safarilauncherLocation);
             capabilities.setCapability("noReset", true);
             capabilities.setCapability("autoAcceptAlerts", true);
+            System.out.println("Going to map the capabilities");
             webDriver = new RemoteWebDriver(new URL(UserConfig.appiumServerURL_iOS), capabilities);
             webDriver.manage().deleteAllCookies();
-            webDriver.get(config.getString("ApplicationURL"));
+            webDriver.get("https://www.fidelity.com/");
             webDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+            System.out.println("browser launched");
         } catch (Exception e) {
             e.printStackTrace();
         }
