@@ -6,7 +6,9 @@ import java.io.IOException;
 import org.apache.commons.configuration.ConfigurationException;
 
 import com.photon.framework.StepLibrary.CommonLibrary;
+import com.photon.framework.StepLibrary.HomeScreenLibrary;
 import com.photon.framework.StepLibrary.JCP_LogIn_Library;
+import com.photon.framework.StepLibrary.FidelityStepLibrary;
 import com.photon.framework.Constant.FidelityConstant.HomePage;
 import com.photon.framework.Constant.FidelityConstant.UsageAgrementPage;
 
@@ -42,6 +44,16 @@ public class UsageAgreementPageSteps {
     @Then("^User lands on Loginpage$")
     public void user_lands_on_homepage() throws Throwable {
         CommonLibrary.isElementPresentVerification(HomePage.login_link);
+    }
+    
+    @When("^User searches for \"(.*)\" in Fidelity website$")
+    public void User_searches_for_in_Fidelity_website(String searchString) throws Exception {
+        FidelityStepLibrary.searchAString(searchString);
+    }
+    
+    @Then("^User validates the search result \"(.*)\"$")
+    public void user_validates_the_search_result(String resultString) throws Throwable {
+        
     }
 
 }

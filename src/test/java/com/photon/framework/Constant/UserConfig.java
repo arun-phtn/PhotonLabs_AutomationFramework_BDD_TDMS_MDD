@@ -3,7 +3,7 @@ package com.photon.framework.Constant;
 public class UserConfig {
 
 
-    public static final String projectLocation = "D:/Photon_Framework";
+    public static final String projectLocation = "/Users/arun_v/git/Photon_AutomationFramework";
 
     /*
      * iOS 
@@ -17,9 +17,9 @@ public class UserConfig {
     /*
      * Android
      */
-    public static final String sdk_location =  "D:/Users/raghu_kr/AppData/Local/Android/sdk";
-    public static final String deviceId =  "578a90d1";
-    public static final String chromeDriver_location =  "http://localhost:9515";
+    public static final String sdk_location =  "/Users/arun_v/Library/Android/sdk";
+    public static final String deviceId =  "ce10171ac135680d05";
+    public static final String chromeDriver_location =  "http://127.0.0.1:4723/wd/hub";
     
     
     /*ChromeDriver */
