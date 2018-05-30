@@ -16,12 +16,13 @@ Feature: Fidelity Website verification and running a smoke test on it
   And User searches for "fidelity funds" in Fidelity website
   Then User validates the search result "Fidelity Mutual Funds"
    
-  @FidelitySmoke
+  @FidelitySmoke1
   Scenario Outline: User validates the home page menu
     Given User launches the Fedelity URL
     Then User lands on the Usage Agrement page
     When User accepts the Usage Agrement
     Then User validate the header menu '<Names>'
+    
     Examples: 
       | Names               |
       | Accounts & Trade    |

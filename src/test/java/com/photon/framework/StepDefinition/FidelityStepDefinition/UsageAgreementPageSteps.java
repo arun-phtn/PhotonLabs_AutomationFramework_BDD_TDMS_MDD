@@ -33,19 +33,19 @@ public class UsageAgreementPageSteps {
 
     @When("^User accepts the Usage Agrement$")
     public void user_accepts_the_usage_agrement() throws Throwable {
-        FidelityStepLibrary.verifyAndClickMobileMenu();
-        CommonLibrary.isElementPresentVerifyClick(UsageAgrementPage.ACCEPT_BUTTON);
+        //FidelityStepLibrary.verifyAndClickMobileMenu();
+        if(!CommonLibrary.isElementAvailable(UsageAgrementPage.ACCEPT_BUTTON))
+            CommonLibrary.isElementPresentVerifyClick(UsageAgrementPage.ACCEPT_BUTTON);
     }
 
     @Then("^User lands on the Usage Agrement page$")
     public void user_lands_on_the_usage_agrement_page() throws Throwable {
-        FidelityStepLibrary.verifyAndClickMobileMenu();
-        CommonLibrary.isElementPresentVerification(UsageAgrementPage.ACCEPT_BUTTON);
+        if(!CommonLibrary.isElementAvailable(UsageAgrementPage.ACCEPT_BUTTON))
+            CommonLibrary.isElementPresentVerification(UsageAgrementPage.ACCEPT_BUTTON);
     }
 
     @Then("^User lands on Loginpage$")
     public void user_lands_on_homepage() throws Throwable {
-        FidelityStepLibrary.verifyAndClickMobileMenu();
         CommonLibrary.isElementPresentVerification(HomePage.login_link);
     }
     
@@ -62,7 +62,6 @@ public class UsageAgreementPageSteps {
     
     @Then("^User validate the header menu '(.+)'$")
     public void user_validate_the_header_menu_(String names) throws Throwable {
-        FidelityStepLibrary.verifyAndClickMobileMenu();
         FidelityStepLibrary.validateHeaderMenu(names);
     }
 

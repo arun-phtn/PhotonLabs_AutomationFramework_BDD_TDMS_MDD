@@ -51,6 +51,7 @@ public class CommonLibrary {
     public static AndroidDriver<MobileElement> nativeDriver = null;
     public static MobileElement mobElement = null;
     public static WebElement element = null;
+    public static List<WebElement> listOfElements= null;
     static WebDriverWait browserWithElementWait = null;
     static long t1 = 0;
     static long t2 = 0;
@@ -75,17 +76,19 @@ public class CommonLibrary {
     }
 
     public static void initiateBrowser() throws ConfigurationException, IOException, InterruptedException {
+        if(webDriver==null) {
         if (config.getString("breakPoint").equalsIgnoreCase("Desktop")) {
             if ("Yes".equalsIgnoreCase(config.getString("fireFox"))) {
                 webDriver = new FirefoxDriver();
                 webDriver.get(config.getString("ApplicationUrl"));
                 webDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
             } else if ("Yes".equalsIgnoreCase(config.getString("chrome"))) {
+                DesiredCapabilities chromeCapabilities = DesiredCapabilities.chrome();
                 System.setProperty("webdriver.chrome.driver", "drivers/chromedriver");
-                webDriver = new ChromeDriver();
+                webDriver = new ChromeDriver(chromeCapabilities);
                 if ("Windows".equalsIgnoreCase(config.getString("operatingSystem"))) {
                 } else {
-                    webDriver = new ChromeDriver();
+                    //webDriver = new ChromeDriver();
                 }
                 webDriver.get(config.getString("ApplicationUrl"));
                 webDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
@@ -106,7 +109,7 @@ public class CommonLibrary {
             } else {
             }
         }
-
+        }
     }
 
     public static void closeBrowser() throws InterruptedException {
@@ -116,7 +119,7 @@ public class CommonLibrary {
         } else {
 
             // webDriver.quit();
-            webDriver.close();
+            webDriver.quit();
         }
     }
 
@@ -126,7 +129,8 @@ public class CommonLibrary {
             capabilities.setCapability(MobileCapabilityType.BROWSER_NAME, BrowserType.CHROME);
             capabilities.setCapability(MobileCapabilityType.PLATFORM, Platform.ANDROID);
             capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
-            capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Samsung Galaxy S8");
+            //capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Samsung Galaxy S8");
+			capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "172.16.111.68:5555");
             capabilities.setCapability(MobileCapabilityType.VERSION, "7.0");
             URL url = new URL("http://127.0.0.1:4723/wd/hub");
             webDriver = new AndroidDriver(url, capabilities);
@@ -328,6 +332,16 @@ public class CommonLibrary {
         } finally {
         }
     }
+    
+    public static boolean isElementAvailable(String objectProperty) {
+        boolean isElementMissing=false;
+        try {
+            isElementMissing = getListOfElementsByProperty(objectProperty, webDriver).isEmpty();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return isElementMissing;
+    }
 
     /*
      * Methods for
@@ -373,6 +387,41 @@ public class CommonLibrary {
         }
 
         return element;
+    }
+    
+    public static List<WebElement> getListOfElementsByProperty(String objectProperty, WebDriver webDriver) {
+        String propertyType = null;
+        WebDriverWait browserWithElementWait = null;
+        try {
+            if (browserWithElementWait == null) {
+                browserWithElementWait = new WebDriverWait(webDriver, config.getInt("elementWaitInSeconds"));
+            }
+            propertyType = StringUtils.substringAfter(objectProperty, "~");
+            objectProperty = StringUtils.substringBefore(objectProperty, "~");
+            if (propertyType.equalsIgnoreCase("CSS")) {
+                webDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+                listOfElements = webDriver.findElements(By.cssSelector(objectProperty));
+            } else if (propertyType.equalsIgnoreCase("XPATH")) {
+                webDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+                listOfElements = webDriver.findElements(By.xpath(objectProperty));
+            } else if (propertyType.equalsIgnoreCase("ID")) {
+                webDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+                listOfElements = webDriver.findElements(By.id(objectProperty));
+            } else if (propertyType.equalsIgnoreCase("NAME")) {
+                webDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+                listOfElements = webDriver.findElements(By.name(objectProperty));
+            } else if (propertyType.equalsIgnoreCase("LINKTEXT")) {
+                webDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+                listOfElements = webDriver.findElements(By.linkText(objectProperty));
+            } else {
+                element = browserWithElementWait
+                        .until(ExpectedConditions.presenceOfElementLocated(By.xpath(objectProperty)));
+            }
+        } catch (Exception e) {
+
+        }
+
+        return listOfElements;
     }
 
     /*
@@ -432,7 +481,8 @@ public class CommonLibrary {
             } else {
                 WebElement textBox = getElementByProperty(objectProperty, webDriver);
                 textBox.clear();
-                Thread.sleep(2000);
+                Thread.sleep(3000);
+				textBox.click();
                 textBox.sendKeys(Text);
                 isTextEnteredResult = true;
             }

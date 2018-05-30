@@ -10,8 +10,10 @@ public class FidelityStepLibrary {
     
     public static void verifyAndClickMobileMenu () {
         try {
-            if(CommonLibrary.isMobile)
+            if(CommonLibrary.isMobile) {
                 CommonLibrary.isElementPresentVerifyClick(HomePage.mobileMenuBar);
+                Thread.sleep(5000);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -28,7 +30,7 @@ public class FidelityStepLibrary {
     }
     
     public static void validateHeaderMenu(String names) throws Exception {
-        
+        //Thread.sleep(2000);
         if(names.equalsIgnoreCase("Accounts & Trade"))
             CommonLibrary.isElementPresentVerification(HomePage.header_Accounts_Trade);
         else if(names.equalsIgnoreCase("Planning & Advice"))
