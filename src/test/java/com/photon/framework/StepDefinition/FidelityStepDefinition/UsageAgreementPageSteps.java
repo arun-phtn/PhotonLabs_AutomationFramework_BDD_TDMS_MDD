@@ -55,5 +55,10 @@ public class UsageAgreementPageSteps {
     public void user_validates_the_search_result(String resultString) throws Throwable {
         
     }
+    
+    @Then("^User validate the header menu '(.+)'$")
+    public void user_validate_the_header_menu_(String names) throws Throwable {
+        FidelityStepLibrary.validateHeaderMenu(names);
+    }
 
 }

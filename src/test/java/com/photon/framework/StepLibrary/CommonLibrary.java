@@ -43,6 +43,7 @@ import cucumber.api.DataTable;
 import cucumber.api.Scenario;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 
 public class CommonLibrary {
@@ -134,6 +135,23 @@ public class CommonLibrary {
             e.printStackTrace();
         }
     }
+    
+    /*public static void initiateBrowser_iOS() throws IOException, InterruptedException {
+        try {
+            DesiredCapabilities capabilities = new DesiredCapabilities();
+            capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "iOS");
+            capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "11.2.6");
+            capabilities.setCapability(MobileCapabilityType.BROWSER_NAME, "Safari");
+            capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Higi iPhone6S");
+            URL url = new URL("http://127.0.0.1:4723/wd/hub");
+            WebDriver driver = new IOSDriver(url, capabilities);
+            driver.get("https://www.fidelity.com/");
+            
+        } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }*/
+        
 
     /*
      * public static void initiateBrowser_Android() throws IOException,
@@ -164,7 +182,7 @@ public class CommonLibrary {
      * Thread.sleep(100000); } catch(Exception e) { e.printStackTrace(); } }
      */
 
-    public static void initiateBrowser_iOS() throws IOException, InterruptedException {
+   public static void initiateBrowser_iOS() throws IOException, InterruptedException {
         try {
             System.out.println("initialising the Ios browser");
             DesiredCapabilities capabilities = new DesiredCapabilities();
@@ -180,12 +198,13 @@ public class CommonLibrary {
             capabilities.setCapability("autoAcceptAlerts", true);
             webDriver = new RemoteWebDriver(new URL(UserConfig.appiumServerURL_iOS), capabilities);
             webDriver.manage().deleteAllCookies();
-            webDriver.get(config.getString("applicationURL"));
+            webDriver.get(config.getString("ApplicationURL"));
             webDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+    
 
     public static void initiateNativeAPP_Android() throws IOException, InterruptedException {
         try {
