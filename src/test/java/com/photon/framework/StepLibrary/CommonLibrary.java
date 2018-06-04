@@ -430,7 +430,7 @@ public class CommonLibrary {
 
     public static boolean isElementPresentVerification(String objectProperty) throws Exception {
         boolean isElementPresent = false;
-        browserWithElementWait = new WebDriverWait(webDriver, 30);
+        browserWithElementWait = new WebDriverWait(webDriver, 2);
         try {
             element = getElementByProperty(objectProperty, webDriver);
             if (element != null) {
@@ -553,7 +553,7 @@ public class CommonLibrary {
      */
     public static boolean isElementPresentVerifyClick(String objectProperty) {
         boolean isVerifiedAndClicked = false;
-        browserWithElementWait = new WebDriverWait(webDriver, 30);
+        browserWithElementWait = new WebDriverWait(webDriver, 2);
         try {
             element = getElementByProperty(objectProperty, webDriver);
             if (element != null) {
