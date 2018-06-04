@@ -14,4 +14,5 @@ public class HomePage {
     public static String header_Investment_Products="//*[@id=\"pnmm\"]/ul/li[4]/div[1]/a~XPATH";
     public static String header_Why_Fidelity="//*[@id=\"pnmm\"]/ul/li[5]/div[1]/a~XPATH";
     public static String mobileMenuBar = "//*[@id=\"pnt\"]/span";
+    public static String login_image="responsive-landing-page~ID";
 }

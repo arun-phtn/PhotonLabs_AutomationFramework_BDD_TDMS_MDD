@@ -36,6 +36,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import com.photon.framework.Constant.UserConfig;
 
@@ -347,7 +348,7 @@ public class CommonLibrary {
      * Methods for
      */
 
-    public static WebElement getElementByProperty(String objectProperty, WebDriver webDriver) {
+	public static WebElement getElementByProperty(String objectProperty, WebDriver webDriver) {
         String propertyType = null;
         WebDriverWait browserWithElementWait = null;
         try {
@@ -439,7 +440,8 @@ public class CommonLibrary {
             } else {
                 throw new Exception("Object Couldn't be retrieved and verified");
             }
-            Thread.sleep(1000);
+            //Thread.sleep(1000);
+            browserWithElementWait.wait(1000);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -461,7 +463,8 @@ public class CommonLibrary {
             } else {
                 throw new Exception("Object Couldn't be retrieved and verified");
             }
-            Thread.sleep(1000);
+            //Thread.sleep(1000);
+            browserWithElementWait.wait(1000);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -481,7 +484,8 @@ public class CommonLibrary {
             } else {
                 WebElement textBox = getElementByProperty(objectProperty, webDriver);
                 textBox.clear();
-                Thread.sleep(3000);
+                //Thread.sleep(3000);
+                browserWithElementWait.wait(3000);
 				textBox.click();
                 textBox.sendKeys(Text);
                 isTextEnteredResult = true;
@@ -506,7 +510,8 @@ public class CommonLibrary {
             } else {
                 WebElement textBox = getElementByProperty(objectProperty, nativeDriver);
                 textBox.clear();
-                Thread.sleep(2000);
+                //Thread.sleep(2000);
+                browserWithElementWait.wait(2000);
                 textBox.sendKeys(Text);
                 isTextEnteredResult = true;
             }
@@ -534,7 +539,8 @@ public class CommonLibrary {
     public static void browserNavigation_Back() {
         try {
             webDriver.navigate().back();
-            Thread.sleep(5000);
+            //Thread.sleep(5000);
+            browserWithElementWait.wait(5000);
         } catch (InterruptedException e) {
 
             e.printStackTrace();
@@ -744,5 +750,12 @@ public class CommonLibrary {
         }
         book.close();
         return col1;
+    }
+    
+    public static void isElementPositionedAsDesigned(String objectProperty, String Xaxis, String Yaxis) {
+    	element = getElementByProperty(objectProperty, nativeDriver);
+    	Point location=element.getLocation();
+    	Assert.assertTrue(Xaxis.equals(location.x), "Xaxis not as positioned");
+    	Assert.assertTrue(Yaxis.equals(location.y), "Yaxis not as positioned");
     }
 }
