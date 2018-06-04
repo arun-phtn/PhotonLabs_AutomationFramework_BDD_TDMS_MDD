@@ -440,8 +440,7 @@ public class CommonLibrary {
             } else {
                 throw new Exception("Object Couldn't be retrieved and verified");
             }
-            //Thread.sleep(1000);
-            browserWithElementWait.wait(1000);
+            Thread.sleep(1000);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -463,8 +462,7 @@ public class CommonLibrary {
             } else {
                 throw new Exception("Object Couldn't be retrieved and verified");
             }
-            //Thread.sleep(1000);
-            browserWithElementWait.wait(1000);
+            Thread.sleep(1000);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -484,8 +482,7 @@ public class CommonLibrary {
             } else {
                 WebElement textBox = getElementByProperty(objectProperty, webDriver);
                 textBox.clear();
-                //Thread.sleep(3000);
-                browserWithElementWait.wait(3000);
+                Thread.sleep(3000);
 				textBox.click();
                 textBox.sendKeys(Text);
                 isTextEnteredResult = true;
@@ -510,8 +507,7 @@ public class CommonLibrary {
             } else {
                 WebElement textBox = getElementByProperty(objectProperty, nativeDriver);
                 textBox.clear();
-                //Thread.sleep(2000);
-                browserWithElementWait.wait(2000);
+                Thread.sleep(2000);
                 textBox.sendKeys(Text);
                 isTextEnteredResult = true;
             }
@@ -539,8 +535,7 @@ public class CommonLibrary {
     public static void browserNavigation_Back() {
         try {
             webDriver.navigate().back();
-            //Thread.sleep(5000);
-            browserWithElementWait.wait(5000);
+            Thread.sleep(5000);
         } catch (InterruptedException e) {
 
             e.printStackTrace();
