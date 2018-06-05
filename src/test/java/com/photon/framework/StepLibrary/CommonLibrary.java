@@ -39,6 +39,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import com.photon.framework.Constant.UserConfig;
+import com.photon.framework.Constant.FidelityConstant.UsageAgrementPage;
 
 import cucumber.api.DataTable;
 import cucumber.api.Scenario;
@@ -130,8 +131,8 @@ public class CommonLibrary {
             capabilities.setCapability(MobileCapabilityType.BROWSER_NAME, BrowserType.CHROME);
             capabilities.setCapability(MobileCapabilityType.PLATFORM, Platform.ANDROID);
             capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
-            //capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Samsung Galaxy S8");
-			capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "172.16.111.68:5555");
+            capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Samsung Galaxy S6");
+			//capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "172.16.111.68:5555");
             capabilities.setCapability(MobileCapabilityType.VERSION, "7.0");
             URL url = new URL("http://127.0.0.1:4723/wd/hub");
             webDriver = new AndroidDriver(url, capabilities);
@@ -472,24 +473,40 @@ public class CommonLibrary {
     /*
      * Methods for Clear and Enter Text
      */
+    
+	public static void serchText(String objectProperty, String Text) throws Exception  {
+    	try {
+	    //	WebElement textBox = getElementByProperty(objectProperty, webDriver);
+	    	Thread.sleep(3000);
+	    	System.out.println(Text);
+	    	webDriver.findElement(By.xpath("//form[@class='pnsm']/div/input")).click();
+	    	webDriver.findElement(By.xpath("//form[@class='pnsm']/div/input")).sendKeys(Text);
+	    }catch(Exception e) {
+    		e.printStackTrace();
+    		throw e;
+    	}
+    }
+    
 
     public static boolean clearAndEnterText(String objectProperty, String Text) {
         boolean isTextEnteredResult = false;
         try {
-            if ("-".equals(Text)) {
-                // ignore this field
-                isTextEnteredResult = true;
-            } else {
+//            if ("-".equals(Text)) {
+//                // ignore this field
+//                isTextEnteredResult = true;
+//            } else {
+        		
                 WebElement textBox = getElementByProperty(objectProperty, webDriver);
-                textBox.clear();
-                Thread.sleep(3000);
-				textBox.click();
+               // textBox.clear();
+                textBox.click();
+				Thread.sleep(3000);
+				System.out.println(Text);
                 textBox.sendKeys(Text);
+				System.out.println(Text);
                 isTextEnteredResult = true;
-            }
+            //}
         } catch (Exception e) {
             e.printStackTrace();
-            ;
         }
         return isTextEnteredResult;
     }
@@ -753,4 +770,22 @@ public class CommonLibrary {
     	Assert.assertTrue(Xaxis.equals(location.x), "Xaxis not as positioned");
     	Assert.assertTrue(Yaxis.equals(location.y), "Yaxis not as positioned");
     }
+    
+    public static void clickHeaderLinks(String Links) throws InterruptedException {
+    	try {
+    	if(!(webDriver.findElement(By.id("pnmm")).isDisplayed()))
+    	FidelityStepLibrary.verifyAndClickMobileMenu();
+    	List<WebElement> linksHeader=webDriver.findElements(By.className("static"));
+    	for(WebElement e: linksHeader) {
+    		if(e.getText().equalsIgnoreCase(Links)) {
+    			e.click();
+    			break;
+    		}
+    	}
+    	Thread.sleep(5000);
+    	}catch(Exception e) {e.printStackTrace();}
+    }
+    
 }
+
+    

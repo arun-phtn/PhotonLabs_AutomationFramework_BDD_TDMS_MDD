@@ -1,9 +1,17 @@
 package com.photon.framework.StepLibrary;
 import com.photon.framework.StepLibrary.CommonLibrary;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
 import com.photon.framework.Constant.FidelityConstant.HomePage;
+import com.photon.framework.Constant.FidelityConstant.UsageAgrementPage;
 
 public class FidelityStepLibrary {
-    public static void searchAString (String searchString) {
+    public static void searchAString (String searchString) throws Exception  {
+    	System.out.println("FidelityStepLibrary : " +searchString);
         CommonLibrary.clearAndEnterText(HomePage.search_TXT, searchString);
         CommonLibrary.isElementPresentVerifyClick(HomePage.selectSearchOption);
     }
@@ -43,4 +51,17 @@ public class FidelityStepLibrary {
             CommonLibrary.isElementPresentVerification(HomePage.header_Why_Fidelity);
        // CommonLibrary.linkText_Validation(objectProperty, names);
     }
+    
+    
+    public static void isHeaderLinksNavigatedToRespectivePage(String Links) throws Exception {
+    	if(Links.equalsIgnoreCase("Refer A Friend")) {
+    		CommonLibrary.isElementPresentVerification(UsageAgrementPage.REFER_FRIEND_PAGE);
+    		Thread.sleep(5000);
+    	}
+    	else {
+    		CommonLibrary.isElementPresentVerification(UsageAgrementPage.HEADER_PAGE);
+    		Thread.sleep(5000);
+    	}
+    }
+    
 }

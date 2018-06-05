@@ -64,5 +64,14 @@ public class UsageAgreementPageSteps {
     public void user_validate_the_header_menu_(String names) throws Throwable {
         FidelityStepLibrary.validateHeaderMenu(names);
     }
-
+    
+    @When("^User click on \"(.*)\" header link$")
+    public void User_click_on_header_link(String headerLinks) throws Exception {
+        CommonLibrary.clickHeaderLinks(headerLinks);
+    }
+    
+    @When("^user should be on \"(.*)\" page$")
+    public void UserShouldBeOnRespectivePage(String headerLinks) throws Exception {
+    	FidelityStepLibrary.isHeaderLinksNavigatedToRespectivePage(headerLinks);
+    }
 }
